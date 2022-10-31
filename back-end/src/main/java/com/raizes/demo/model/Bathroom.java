@@ -21,6 +21,8 @@ public class Bathroom {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String title;
+
     private Integer length;
     private Integer height;
 
@@ -34,10 +36,13 @@ public class Bathroom {
 
     private Boolean vanity;
     private String vanity_Comments;
+
     private Boolean tub;
     private String tub_Comments;
+
     private Boolean sink;
     private String sink_Comments;
+
     private Boolean toilet;
     private String toilet_Comments;
 
