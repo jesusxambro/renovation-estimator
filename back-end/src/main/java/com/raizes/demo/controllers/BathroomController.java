@@ -25,6 +25,12 @@ public class BathroomController {
     public List<Bathroom> getAllProjects(){
         return this.repository.findAll();
     }
+
+    @PostMapping("/list")
+    public List<Bathroom> postListProjects(@RequestBody List<Bathroom> listToAdd){
+        this.repository.saveAll(listToAdd);
+        return this.repository.findAll();
+    }
     @GetMapping("/{id}")
     public Bathroom getById(@PathVariable Long id) {
         return this.repository.findById(id).orElseThrow(NoSuchElementException::new);
