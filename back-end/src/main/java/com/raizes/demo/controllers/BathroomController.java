@@ -27,7 +27,7 @@ public class BathroomController {
     }
     @GetMapping("/{id}")
     public Bathroom getById(@PathVariable Long id) {
-        return this.repository.getReferenceById(id);
+        return this.repository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     @PostMapping("/")
