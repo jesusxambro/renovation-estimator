@@ -27,8 +27,8 @@ public class Bathroom {
     private String client_FirstName;
     private String client_LastName;
 
-//    @JsonFormat(pattern = "dd-MM-yyyy")
-//    private LocalDate projectDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate projectDate;
 
 
 
@@ -157,5 +157,13 @@ public class Bathroom {
 
     public void setToilet_Comments(String toilet_Comments) {
         this.toilet_Comments = toilet_Comments;
+    }
+
+    public LocalDate getProjectDate() {
+        return projectDate;
+    }
+
+    public void setProjectDate(LocalDate projectDate) {
+        this.projectDate = projectDate;
     }
 }

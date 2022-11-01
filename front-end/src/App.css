@@ -39,3 +39,10 @@
 /*.read-the-docs {*/
 /*  color: #888;*/
 /*}*/
+.project_photo{
+    width: 200px;
+}
+#project-detail{
+    display: flex;
+
+}

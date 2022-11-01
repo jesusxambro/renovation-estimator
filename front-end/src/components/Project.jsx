@@ -1,15 +1,30 @@
 import React from 'react';
-import {Card, CardActions, CardContent, CardMedia} from "@mui/material";
+import {Card, CardActionArea, CardActions, CardContent, CardMedia} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 
 function Project(props){
 
 
+   async function handleDelete() {
+       try{
+           const res = await axios.delete(`http://localhost:8080/bathrooms/${props.project.id}`);
+           console.log(res);
+           props.getProjects();
+
+       }catch (e) {
+           console.log(e);
+       }
+    }
+
     return(
         <Card sx={{ maxWidth: 345 }}>
+            <CardActionArea component={Link} to={`/details/${props.project.id}`}>
+
+
             <CardMedia
                 component="img"
                 alt="renovation in progress in a bathroom"
@@ -24,11 +39,12 @@ function Project(props){
                     Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
                 </Typography>
             </CardContent>
+        </CardActionArea>
             <CardActions>
                 <Link to={`/details/${props.project.id}`}>
                 <Button size="small">Detail</Button>
                 </Link>
-                <Button size="small">Delete</Button>
+                <Button size="small" onClick={handleDelete}>Delete</Button>
             </CardActions>
         </Card>
     )

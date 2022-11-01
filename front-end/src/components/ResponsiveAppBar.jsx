@@ -40,7 +40,7 @@ function ResponsiveAppBar() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <ConstructionIcon sx={{ display: { xs: 'none', md: 'flex' },
+                    <ConstructionIcon sx={{ display: { xs: 'flex', md: 'flex' },
                         color:'black',
                         mr: 1
                     }} />
@@ -51,7 +51,7 @@ function ResponsiveAppBar() {
                         href="/"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: { xs: 'block', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
@@ -61,7 +61,7 @@ function ResponsiveAppBar() {
                     >
                         Renovation Estimator
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
                             <Button
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >

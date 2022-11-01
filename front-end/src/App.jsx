@@ -6,10 +6,10 @@ import {Route, Routes} from "react-router-dom";
 import Home from "./routes/Home.jsx";
 import axios from "axios";
 import ProjectDetail from "./components/ProjectDetail.jsx";
+import EditProject from "./components/EditProject.jsx";
 
 function App() {
     const [projects, setProjects] = useState([]);
-    const [project, setProject] = useState({});
 
 
     async function getAllProjects() {
@@ -32,8 +32,9 @@ function App() {
         <>
             <ResponsiveAppBar/>
             <Routes>
-                <Route path='/' element={<Home list={projects}/>}/>
+                <Route path='/' element={<Home list={projects} getProjects={getAllProjects}/>}/>
                 <Route path='details/:id' element={<ProjectDetail  /> }/>
+                <Route path='details/:id/edit' element={<EditProject />}/>
             </Routes>
         </>
 
