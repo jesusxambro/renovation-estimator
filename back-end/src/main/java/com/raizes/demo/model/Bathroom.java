@@ -30,7 +30,7 @@ public class Bathroom {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate projectDate;
 
-
+    private Long total;
 
     private Boolean vanity;
     private String vanity_Comments;
@@ -45,6 +45,14 @@ public class Bathroom {
     private String toilet_Comments;
 
     public Bathroom() {
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     public Long getId() {

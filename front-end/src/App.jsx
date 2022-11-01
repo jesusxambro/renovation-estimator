@@ -34,7 +34,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home list={projects} getProjects={getAllProjects}/>}/>
                 <Route path='details/:id' element={<ProjectDetail  /> }/>
-                <Route path='details/:id/edit' element={<EditProject />}/>
+                <Route path='details/:id/edit' element={<EditProject getProjects={getAllProjects}/>}/>
             </Routes>
         </>
 
