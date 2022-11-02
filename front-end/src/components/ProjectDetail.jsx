@@ -7,6 +7,7 @@ import CountertopsIcon from '@mui/icons-material/Countertops';
 import AirlineSeatLegroomNormalIcon from '@mui/icons-material/AirlineSeatLegroomNormal';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 import {Card, Grid} from "@mui/material";
+import Button from "@mui/material/Button";
 
 
 function ProjectDetail() {
@@ -100,6 +101,10 @@ function ProjectDetail() {
                 src="https://preview.redd.it/gx2d26c1auu91.jpg?width=3024&format=pjpg&auto=webp&s=671fce4dccb1d71d10fbee865b972ffc0ef6730b"
                 className="project_photo"
                 alt="project picture of a bathroom"/>
+            <h2>Description:</h2>
+            <p>
+                {project.description}
+            </p>
             <h4>
                 Size of the project:
             </h4>
@@ -113,7 +118,8 @@ function ProjectDetail() {
                 {getWorkedOn()}
             </>
             <Link to={`/details/${project.id}/edit`}>
-                <EditIcon/>
+                <Button variant="contained">Edit<EditIcon/>  </Button>
+
             </Link>
         </Card>
             </Grid>

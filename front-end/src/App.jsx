@@ -7,6 +7,7 @@ import Home from "./routes/Home.jsx";
 import axios from "axios";
 import ProjectDetail from "./components/ProjectDetail.jsx";
 import EditProject from "./components/EditProject.jsx";
+import AddNew from "./components/AddNew.jsx";
 
 function App() {
     const [projects, setProjects] = useState([]);
@@ -35,6 +36,7 @@ function App() {
                 <Route path='/' element={<Home list={projects} getProjects={getAllProjects}/>}/>
                 <Route path='details/:id' element={<ProjectDetail  /> }/>
                 <Route path='details/:id/edit' element={<EditProject getProjects={getAllProjects}/>}/>
+                <Route path='/new' element={<AddNew />}/>
             </Routes>
         </>
 

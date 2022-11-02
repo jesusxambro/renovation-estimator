@@ -44,7 +44,17 @@ public class Bathroom {
     private Boolean toilet;
     private String toilet_Comments;
 
+    private String description;
+
     public Bathroom() {
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getTotal() {

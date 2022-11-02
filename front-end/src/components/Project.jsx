@@ -8,7 +8,6 @@ import axios from "axios";
 
 function Project(props){
 
-
    async function handleDelete() {
        try{
            const res = await axios.delete(`http://localhost:8080/bathrooms/${props.project.id}`);
@@ -35,16 +34,17 @@ function Project(props){
                 <Typography gutterBottom variant="h5" component="div">
                     {props.project.title}
                 </Typography>
+
                 <Typography variant="body2" color="text.secondary">
-                    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+                    {props.project.description}
                 </Typography>
             </CardContent>
         </CardActionArea>
             <CardActions>
                 <Link to={`/details/${props.project.id}`}>
-                <Button size="small">Detail</Button>
+                <Button variant="contained" size="small">Detail</Button>
                 </Link>
-                <Button size="small" onClick={handleDelete}>Delete</Button>
+                <Button size="small" variant="contained" onClick={handleDelete}>Delete</Button>
             </CardActions>
         </Card>
     )

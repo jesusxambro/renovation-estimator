@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {useParams, Navigate, useNavigate} from "react-router-dom";
+import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import {Checkbox, FormControlLabel, FormGroup, InputAdornment, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 
-
-function EditProject() {
-    let {id} = useParams();
-    const [project, setProject] = useState({});
+function AddNew() {
     const [title, setTitle] = useState("");
     const [height, setHeight] = useState("");
     const [length, setLength] = useState("");
@@ -28,47 +25,11 @@ function EditProject() {
 
     const navigate = useNavigate();
 
-
-    async function getProject() {
-        try {
-            const res = await axios.get(`http://localhost:8080/bathrooms/${id}`)
-            setProject(res.data);
-            // console.log(res)
-            setTitle(res.data.title)
-            setLength(res.data.length);
-            setHeight(res.data.height);
-            setClientFirstName(res.data.client_FirstName);
-            setClientLastName(res.data.client_LastName);
-            setProjectDate(res.data.projectDate);
-            setVanity(res.data.vanity);
-            setVanityComments(res.data.vanity_Comments);
-            setSink(res.data.sink);
-            setSinkComments(res.data.sink_Comments);
-            setTub(res.data.tub);
-            setTubComments(res.data.tub_Comments);
-            setToilet(res.data.toilet);
-            setToiletComments(res.data.toilet_Comments);
-            setTotal(res.data.total);
-            setDescription(res.data.description);
-
-        } catch (e) {
-            console.log(e);
-        }
-
-    }
-
-    useEffect(() => {
-        getProject().then();
-
-
-    }, [])
-
-
-    async function handlePatch() {
+    async function handleSubmit() {
         event.preventDefault();
 
         try {
-            const res = await axios.patch(`http://localhost:8080/bathrooms/${project.id}`, {
+            const res = await axios.post(`http://localhost:8080/bathrooms/`, {
                 "title": title,
                 "length": length,
                 "height": height,
@@ -87,6 +48,7 @@ function EditProject() {
                 "description": description
             })
             if (res.status === 200) {
+                alert("Success!")
                 navigate("/");
             }
 
@@ -99,7 +61,7 @@ function EditProject() {
 
         <div>
             <h1>
-                Edit
+                Add A New Project
             </h1>
 
             <Box
@@ -265,6 +227,7 @@ function EditProject() {
                         }}
                     /> : null}
                 </div>
+
                 <hr/>
 
 
@@ -283,10 +246,12 @@ function EditProject() {
 
             </Box>
             <Button variant="contained"
-                    onClick={handlePatch}
+                    onClick={handleSubmit}
             > Submit </Button>
 
-        </div>)
+        </div>
+
+    )
 }
 
-export default EditProject;
+export default AddNew;

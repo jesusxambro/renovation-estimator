@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ConstructionIcon from '@mui/icons-material/Construction';
+import {Link} from "react-router-dom";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -61,11 +62,12 @@ function ResponsiveAppBar() {
                     >
                         Renovation Estimator
                     </Typography>
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
-                            <Button
+                            <Button href="/new"
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                               Add a new project
+                                Add a new project
                             </Button>
                     </Box>
 
