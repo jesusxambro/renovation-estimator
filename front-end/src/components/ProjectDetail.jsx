@@ -83,13 +83,14 @@ function ProjectDetail() {
     }
 
     return (
+        <div  style={{ paddingTop:10 }}>
         <Grid
             container
             spacing={0}
             direction="column"
             alignItems="center"
             justify="center"
-            // style={{ maxHeight: '80vh', minWidth: '80vh' }}
+
         >
 
             <Grid item xs={3} style={{ maxHeight: '80vh', minWidth: '80vh' }}>
@@ -124,6 +125,7 @@ function ProjectDetail() {
         </Card>
             </Grid>
         </Grid>
+        </div>
     )
 }
 
