@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {SetStateAction, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import Projects from "./Projects";
 import {Project, ProjectData} from "../App";
@@ -9,6 +9,7 @@ import AirlineSeatLegroomNormalIcon from '@mui/icons-material/AirlineSeatLegroom
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 import EditIcon from '@mui/icons-material/Edit';
 import BathtubIcon from '@mui/icons-material/Bathtub';
+
 
 function ProjectDetail(){
    let {id} = useParams();

@@ -1,50 +1,38 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {Box, Button, FormControl, FormErrorMessage, FormLabel, Input} from "@chakra-ui/react";
+import {z} from "zod";
+import {useNavigate, useParams} from "react-router-dom";
+import {Project, ProjectData} from "../App";
+import axios from "axios";
+import FormProject from "./FormProject";
 
 function EditProject(){
-    function validateName(value:string) {
-        let error
-        if (!value) {
-            error = 'Name is required'
-        } else if (value.toLowerCase() !== 'naruto') {
-            error = "Jeez! You're not a fan 😱"
+
+    let {id} = useParams();
+    const [project, setProjects] = useState<Project>();
+    const navigate = useNavigate();
+    async function getProject(){
+        try {
+            const result = await axios.get(`http://localhost:8080/bathrooms/${id}`);
+            setProjects(ProjectData.parse(result.data));
+
+        }catch (e) {
+            console.log(e)
         }
-        return error
+
     }
+    useEffect(()=>{
+        getProject().then();
+    },[])
+
+
 
     return(
-        <Formik
-            initialValues={{ name: 'Sasuke' }}
-            onSubmit={(values, actions) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2))
-                    actions.setSubmitting(false)
-                }, 1000)
-            }}
-        >
-            {(props) => (
-                <Form>
-                    <Field name='name' validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}>
-                                <FormLabel>First name</FormLabel>
-                                <Input {...field} placeholder='name' />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Button
-                        mt={4}
-                        colorScheme='teal'
-                        isLoading={props.isSubmitting}
-                        type='submit'
-                    >
-                        Submit
-                    </Button>
-                </Form>
-            )}
-        </Formik>
+        <>
+            <FormProject project={project}/>
+        </>
+
     )
 }
 

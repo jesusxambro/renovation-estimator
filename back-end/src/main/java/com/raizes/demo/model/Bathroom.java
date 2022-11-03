@@ -45,6 +45,15 @@ public class Bathroom {
     private String toilet_Comments;
 
     private String description;
+    private Integer firstEstimate;
+
+    public Integer getFirstEstimate() {
+        return firstEstimate;
+    }
+
+    public void setFirstEstimate(Integer firstEstimate) {
+        this.firstEstimate = firstEstimate;
+    }
 
     public Bathroom() {
     }

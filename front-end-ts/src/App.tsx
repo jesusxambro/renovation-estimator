@@ -34,6 +34,7 @@ export type Project = z.infer<typeof ProjectData>
 
 function App() {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [selectedProject, setSelectedProject] = useState<Project>();
 
     async function getAllProjects() {
         try{
@@ -54,8 +55,8 @@ function App() {
           <WithSubnavigation/>
             <Routes>
                 <Route path='/' element={<Home list={projects}/>}/>
-                <Route path='/bathrooms/:id' element={<ProjectDetail/>}/>
-                <Route path='/bathrooms/:id/edit' element={<EditProject/>}/>
+                <Route path='/bathrooms/:id' element={<ProjectDetail />}/>
+                <Route path='/bathrooms/:id/edit' element={<EditProject />}/>
             </Routes>
 
       </div>

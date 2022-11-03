@@ -28,6 +28,7 @@ function Projects(props: ProjectsProps){
     let randomIndex = Math.floor(Math.random() * 3);
     const navigate = useNavigate();
     function handleClick() {
+
         navigate(`/bathrooms/${props.project.id}`)
     }
 

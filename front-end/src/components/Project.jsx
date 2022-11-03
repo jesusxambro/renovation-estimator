@@ -4,9 +4,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
 import axios from "axios";
-
+import CatSound from '../assets/cat.mp3'
 
 function Project(props){
+    let catSound = new Audio(CatSound);
 
    async function handleDelete() {
        try{
@@ -41,7 +42,7 @@ function Project(props){
             </CardContent>
         </CardActionArea>
             <CardActions>
-                <Link to={`/details/${props.project.id}`}>
+                <Link onClick={(event)=>{catSound.play().then()}} to={`/details/${props.project.id}`}>
                 <Button variant="contained" size="small">Detail</Button>
                 </Link>
                 <Button size="small" variant="contained" onClick={handleDelete}>Delete</Button>
