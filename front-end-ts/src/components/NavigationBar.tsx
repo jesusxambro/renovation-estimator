@@ -16,13 +16,14 @@ import {
     useDisclosure,
 } from '@chakra-ui/react';
 import {IoConstructOutline} from "react-icons/all";
+import {useNavigate} from "react-router-dom";
 
 
 export default function WithSubnavigation() {
     const linkColor = useColorModeValue('gray.600', 'gray.200');
     const linkHoverColor = useColorModeValue('gray.800', 'white');
     const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-
+    const navigate = useNavigate();
     return (
         <Box>
             <Flex
@@ -45,6 +46,8 @@ export default function WithSubnavigation() {
                          fontFamily={'heading'}
                          fontSize='3xl'
                          as='b'
+                         sx={{':hover': {cursor: 'pointer',}}}
+                         onClick={(event)=>{navigate('/')}}
                          color={useColorModeValue('gray.800', 'white')}>
                          <IoConstructOutline />
                         Renovations Estimator

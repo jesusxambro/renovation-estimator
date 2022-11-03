@@ -13,6 +13,8 @@ import {
 import Image1 from '../assets/one-bathroom.jpg';
 import Image2 from '../assets/two-bathroom.jpg';
 import Image3 from '../assets/three-bathroom.jpg';
+import {Link, useNavigate} from "react-router-dom";
+
 
 
 
@@ -24,6 +26,10 @@ interface ProjectsProps {
 function Projects(props: ProjectsProps){
     const imageArray = [Image1, Image2, Image3];
     let randomIndex = Math.floor(Math.random() * 3);
+    const navigate = useNavigate();
+    function handleClick() {
+        navigate(`/bathrooms/${props.project.id}`)
+    }
 
     return(
         <div>
@@ -35,6 +41,8 @@ function Projects(props: ProjectsProps){
                     boxShadow={'2xl'}
                     rounded={'md'}
                     p={6}
+                    sx={{':hover': {cursor: 'pointer',}}}
+                    onClick={handleClick}
                     overflow={'hidden'}>
                     <Box
                         h={'210px'}
@@ -58,20 +66,16 @@ function Projects(props: ProjectsProps){
                             fontWeight={800}
                             fontSize={'sm'}
                             letterSpacing={1.1}>
-
-                            {props.project.total}
+                            ${props.project.total}
                         </Text>
                         <Heading
                             color={useColorModeValue('gray.700', 'white')}
                             fontSize={'2xl'}
                             fontFamily={'body'}>
-                            Boost your conversion rate
+                            {props.project.title}, Illinois
                         </Heading>
                         <Text color={'gray.500'}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                            et ea rebum.
+                            {props.project.description}
                         </Text>
                     </Stack>
                     <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
@@ -80,8 +84,8 @@ function Projects(props: ProjectsProps){
 
                         />
                         <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-                            <Text fontWeight={600}>Achim Rolle</Text>
-                            <Text color={'gray.500'}>Feb 08, 2021 · 6min read</Text>
+                            <Text fontWeight={600}>{props.project.client_FirstName} {props.project.client_LastName}</Text>
+                            <Text color={'gray.500'}>{props.project.projectDate} · Completed</Text>
                         </Stack>
                     </Stack>
                 </Box>

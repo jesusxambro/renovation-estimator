@@ -5,26 +5,32 @@ import axios from "axios";
 import WithSubnavigation from "./components/NavigationBar";
 import {Route, Routes} from "react-router-dom";
 import Home from "./components/Home";
+import ProjectDetail from "./components/ProjectDetail";
+import {z} from "zod";
+import EditProject from "./components/EditProject";
 
-export interface Project {
-    id: number
-    title: string
-    length: number
-    height: number
-    client_FirstName: string
-    client_LastName: string
-    projectDate: string
-    total: number
-    vanity: boolean
-    vanity_Comments: string
-    tub: boolean
-    tub_Comments: string
-    sink: boolean
-    sink_Comments: string
-    toilet: boolean
-    toilet_Comments: string
-    description: string
-}
+export const ProjectData = z.object(
+    {
+        id: z.number().min(1),
+        title: z.string().min(1),
+        length: z.number(),
+        height: z.number(),
+        client_FirstName: z.string().min(1),
+        client_LastName: z.string().min(1),
+        projectDate: z.string().min(1),
+        total: z.number(),
+        vanity: z.boolean(),
+        vanity_Comments: z.string().min(1),
+        tub: z.boolean(),
+        tub_Comments: z.string().min(1),
+        sink: z.boolean(),
+        sink_Comments: z.string().min(1),
+        toilet: z.boolean(),
+        toilet_Comments: z.string().min(1),
+        description: z.string().min(1)
+    }
+)
+export type Project = z.infer<typeof ProjectData>
 
 function App() {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -48,6 +54,8 @@ function App() {
           <WithSubnavigation/>
             <Routes>
                 <Route path='/' element={<Home list={projects}/>}/>
+                <Route path='/bathrooms/:id' element={<ProjectDetail/>}/>
+                <Route path='/bathrooms/:id/edit' element={<EditProject/>}/>
             </Routes>
 
       </div>
