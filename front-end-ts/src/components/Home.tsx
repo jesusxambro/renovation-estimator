@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import {Project} from "../App";
+import Projects from "./Projects";
+import {Box, SimpleGrid} from "@chakra-ui/react";
+
 
 
 interface HomeProps{
@@ -7,12 +10,25 @@ interface HomeProps{
 }
 
 function Home(props:HomeProps){
-    const [list, setList] = useState(props.list);
+
 
     return(
-        <>
-            I am the home page!
-        </>
+        <div>
+            <SimpleGrid columns={3} spacing={5}>
+                {props.list.length > 0?
+                    props.list.map((project,index)=>{
+                        return(
+                            <Box key={index}>
+                                <Projects key={index} project={project}/>
+                            </Box>
+                        )
+                    })
+                    :
+                    <h1>No Current Projects!</h1>
+                }
+            </SimpleGrid>
+
+        </div>
     )
 }
 
