@@ -8,6 +8,12 @@ import Home from "./components/Home";
 import ProjectDetail from "./components/ProjectDetail";
 import {z} from "zod";
 import EditProject from "./components/EditProject";
+import Splash from "./components/Splash";
+import Footer from "./components/Footer";
+import {Button} from "@chakra-ui/react";
+import {SmallCloseIcon} from "@chakra-ui/icons";
+import AddNew from "./components/AddNew";
+
 
 export const ProjectData = z.object(
     {
@@ -40,54 +46,61 @@ export type Project = z.infer<typeof ProjectData>
 function App() {
     const [projects, setProjects] = useState<Project[]>([]);
     const [selectedProject, setSelectedProject] = useState<Project>();
+    const [isFooterOpen, setIsFooterOpen] = useState(true);
 
     async function getAllProjects() {
-        try{
+        try {
             const result = await axios.get('http://localhost:8080/bathrooms/');
             setProjects(result.data);
 
-        }catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getAllProjects().then();
-    },[])
+    }, [])
 
-  return (
-      <div>
-          <WithSubnavigation/>
+    return (
+        <div>
+            <WithSubnavigation/>
             <Routes>
-                <Route path='/' element={<Home list={projects}/>}/>
-                <Route path='/bathrooms/:id' element={<ProjectDetail />}/>
-                <Route path='/bathrooms/:id/edit' element={<EditProject />}/>
-            </Routes>
+                <Route path='/' element={<Splash/>}/>
+                <Route path='/bathrooms' element={<Home list={projects}/>}/>
+                <Route path='/bathrooms/:id' element={<ProjectDetail/>}/>
+                <Route path='/bathrooms/:id/edit' element={<EditProject/>}/>
+                <Route path='/bathrooms/new' element={<AddNew/>}/>
 
-      </div>
-    // <div className="App">
-    //   <div>
-    //     <a href="https://vitejs.dev" target="_blank">
-    //       <img src="/vite.svg" className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://reactjs.org" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </div>
-  )
+            </Routes>
+                <Footer />
+
+
+
+        </div>
+        // <div className="App">
+        //   <div>
+        //     <a href="https://vitejs.dev" target="_blank">
+        //       <img src="/vite.svg" className="logo" alt="Vite logo" />
+        //     </a>
+        //     <a href="https://reactjs.org" target="_blank">
+        //       <img src={reactLogo} className="logo react" alt="React logo" />
+        //     </a>
+        //   </div>
+        //   <h1>Vite + React</h1>
+        //   <div className="card">
+        //     <button onClick={() => setCount((count) => count + 1)}>
+        //       count is {count}
+        //     </button>
+        //     <p>
+        //       Edit <code>src/App.tsx</code> and save to test HMR
+        //     </p>
+        //   </div>
+        //   <p className="read-the-docs">
+        //     Click on the Vite and React logos to learn more
+        //   </p>
+        // </div>
+    )
 }
 
 export default App

@@ -57,12 +57,30 @@ export default function WithSubnavigation() {
 
                 </Flex>
                 <Stack direction={'row'} spacing={4}>
-
+                    <Box>
+                        <Popover trigger={'hover'} placement={'bottom-start'}>
+                            <PopoverTrigger>
+                                <Link
+                                    onClick={()=>{navigate('/bathrooms')}}
+                                    p={2}
+                                    fontSize={'lg'}
+                                    fontWeight={500}
+                                    color={linkColor}
+                                    _hover={{
+                                        textDecoration: 'none',
+                                        color: linkHoverColor,
+                                    }}>
+                                    Projects
+                                </Link>
+                            </PopoverTrigger>
+                        </Popover>
+                    </Box>
                     <Box>
                         <Popover trigger={'hover'} placement={'bottom-start'}>
                             <PopoverTrigger>
                                 <Link
                                     p={2}
+                                    onClick={()=>{navigate('/bathrooms/new')}}
                                     fontSize={'md'}
                                     fontWeight={500}
                                     color={linkColor}

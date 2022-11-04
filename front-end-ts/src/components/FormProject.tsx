@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
 import {Field, Form, Formik} from "formik";
-import {Button, FormControl, FormErrorMessage, FormLabel, Input} from "@chakra-ui/react";
+import {Box, Button, FormControl, FormErrorMessage, FormLabel, Input, SimpleGrid} from "@chakra-ui/react";
 import {Project} from "../App";
 import InputFieldCustom from "./InputFieldCustom";
 import axios from "../fetcher/axios";
+import projects from "./Projects";
 
-interface FormProjectProps{
-    project: Project
+interface FormProjectProps {
+    project?: Project
 }
 
-function FormProject({project}: FormProjectProps){
+function FormProject({project}: FormProjectProps) {
 
-    function validateName(value:string) {
+    function validateName(value: string) {
         let error
         if (!value) {
             error = 'Name is required'
@@ -20,32 +21,84 @@ function FormProject({project}: FormProjectProps){
         }
         return error
     }
-    return(
+
+    // function handleNewProject(project: Project|{}) {
+    //
+    // }
+    //
+    // function editProject(project: Project|{}) {
+    //     const res = await axios.patch(`/bathrooms/${projects.id}`, values)
+    // }
+
+    return (
         <Formik
             initialValues={
                 // mind BLOWN!!!
-                project
+                project || {}
             }
             enableReinitialize
-            onSubmit={async (values, actions)  => {
-                const res = await axios.patch(`/bathrooms/${project.id}`, values)
+            onSubmit={async (values, actions) => {
+                try {
+                    if (!project?.id) {
+                        const res = await axios.post(`/bathrooms/`, values)
+                    } else {
+                        const res = await axios.patch(`/bathrooms/${project.id}`, values)
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+
 
             }}
         >
             {(props) => (
                 <Form>
                     {/*//mind BLOWN*/}
-                    <InputFieldCustom name='title' />
-                    <InputFieldCustom name='client_FirstName' />
-                    <InputFieldCustom name='client_LastName' />
-                    <InputFieldCustom name='length' />
-                    <InputFieldCustom name='height' />
-                    <InputFieldCustom name='description' />
-                    <InputFieldCustom name='address' />
-                    <InputFieldCustom name='zipCode' type='number' />
-                    <InputFieldCustom name='total' type='number' />
+                    <SimpleGrid columns={[2, null, 3]} spacing='40px'>
+                        <Box>
+                            <InputFieldCustom name='title'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='client_FirstName'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='client_LastName'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='length' type='number'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='height' type='number'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='description'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='address'/>
+
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='zipCode' type='number'/>
+
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='total' type='number'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='projectDate' type='date'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='address' type='text'/>
+                        </Box>
+                        <Box>
+                            <InputFieldCustom name='city' type='text'/>
+                        </Box>
 
 
+                        <InputFieldCustom name='state' type='text'/>
+                        <InputFieldCustom name='zipCode' type='number'/>
+                        <InputFieldCustom name='firstEstimate' type='number'/>
+                    </SimpleGrid>
 
 
                     {/*<Field name='title'*/}
@@ -113,14 +166,18 @@ function FormProject({project}: FormProjectProps){
                     {/*        </FormControl>*/}
                     {/*    )}*/}
                     {/*</Field>*/}
-                    <Button
-                        mt={4}
-                        colorScheme='teal'
-                        isLoading={props.isSubmitting}
-                        type='submit'
-                    >
-                        Submit
-                    </Button>
+                    <Box display='flex' justifyContent='center' py={10}>
+                        <Button
+                            mt={4}
+                            colorScheme='teal'
+                            isLoading={props.isSubmitting}
+                            type='submit'
+                        >
+                            Submit
+                        </Button>
+
+                    </Box>
+
                 </Form>
             )}
         </Formik>
