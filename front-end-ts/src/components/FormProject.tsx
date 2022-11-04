@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import {Field, Form, Formik} from "formik";
 import {Button, FormControl, FormErrorMessage, FormLabel, Input} from "@chakra-ui/react";
 import {Project} from "../App";
+import InputFieldCustom from "./InputFieldCustom";
+import axios from "../fetcher/axios";
 
 interface FormProjectProps{
     project: Project
 }
 
-
-function FormProject(props: FormProjectProps){
+function FormProject({project}: FormProjectProps){
 
     function validateName(value:string) {
         let error
@@ -21,99 +22,97 @@ function FormProject(props: FormProjectProps){
     }
     return(
         <Formik
-            initialValues={{
-                id:`${props.project?.id}`,
-                title: `${project?.title}`,
-                length: `${project?.length}`,
-                height: `${project?.height}`,
-                client_FirstName: `${project?.client_FirstName}`,
-                client_LastName: `${project?.client_LastName}`,
-                projectDate: `${project?.projectDate}`,
-                total: `${project?.total}`,
-                vanity: `${project?.vanity}`,
-                vanity_Comments: `${project?.vanity_Comments}`,
-                tub: `${project?.tub}`,
-                tub_Comments: `${project?.tub_Comments}`,
-                sink: `${project?.sink}`,
-                sink_Comments: `${project?.sink_Comments}`,
-                toilet: `${project?.toilet}`,
-                toilet_Comments: `${project?.toilet_Comments}`,
-                description: `${project?.description}`
-            }}
-            onSubmit={(values, actions) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    actions.setSubmitting(false);
-                }, 1000)
+            initialValues={
+                // mind BLOWN!!!
+                project
+            }
+            enableReinitialize
+            onSubmit={async (values, actions)  => {
+                const res = await axios.patch(`/bathrooms/${project.id}`, values)
+
             }}
         >
             {(props) => (
                 <Form>
-                    <Field name='title'
-                           validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}
-                                         sx={{width:'200px'}}
-                            >
-                                <FormLabel>Title</FormLabel>
-                                <Input {...field.title} placeholder='Title' />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Field name='name' validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}
-                                         sx={{width:'200px'}}
-                            >
-                                <FormLabel>First name</FormLabel>
-                                <Input {...field} placeholder='first name' />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Field name='name' validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}
-                                         sx={{width:'200px'}}
-                            >
-                                <FormLabel>Last name</FormLabel>
-                                <Input {...field} placeholder='last name' />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Field name='name' validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}>
-                                <FormLabel>Description</FormLabel>
-                                <Input {...field} placeholder='description' />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Field name='name' validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}
-                                         sx={{width:'200px'}}
-                            >
-                                <FormLabel>Length</FormLabel>
-                                <Input {...field} placeholder='length' />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Field name='name' validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}
-                                         sx={{width:'200px'}}
-                            >
-                                <FormLabel>Height</FormLabel>
-                                <Input {...field} placeholder='height' />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
+                    {/*//mind BLOWN*/}
+                    <InputFieldCustom name='title' />
+                    <InputFieldCustom name='client_FirstName' />
+                    <InputFieldCustom name='client_LastName' />
+                    <InputFieldCustom name='length' />
+                    <InputFieldCustom name='height' />
+                    <InputFieldCustom name='description' />
+                    <InputFieldCustom name='address' />
+                    <InputFieldCustom name='zipCode' type='number' />
+                    <InputFieldCustom name='total' type='number' />
+
+
+
+
+                    {/*<Field name='title'*/}
+                    {/*       validate={validateName}>*/}
+                    {/*    {({  field, form }: any) => (*/}
+                    {/*        <FormControl isInvalid={form.errors.name && form.touched.name}*/}
+                    {/*                     sx={{width:'200px'}}*/}
+                    {/*        >*/}
+                    {/*            <FormLabel>Title</FormLabel>*/}
+                    {/*            <Input {...field} placeholder='Title' />*/}
+                    {/*            <FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                    {/*        </FormControl>*/}
+                    {/*    )}*/}
+                    {/*</Field>*/}
+                    {/*<Field name='client_FirstName' validate={validateName}>*/}
+                    {/*    {({ field, form }: any) => (*/}
+                    {/*        <FormControl isInvalid={form.errors.name && form.touched.name}*/}
+                    {/*                     sx={{width:'200px'}}*/}
+                    {/*        >*/}
+                    {/*            <FormLabel>First name</FormLabel>*/}
+                    {/*            <Input {...field} placeholder='first name' />*/}
+                    {/*            <FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                    {/*        </FormControl>*/}
+                    {/*    )}*/}
+                    {/*</Field>*/}
+                    {/*<Field name='client_LastName' validate={validateName}>*/}
+                    {/*    {({ field, form }) => (*/}
+                    {/*        <FormControl isInvalid={form.errors.name && form.touched.name}*/}
+                    {/*                     sx={{width:'200px'}}*/}
+                    {/*        >*/}
+                    {/*            <FormLabel>Last name</FormLabel>*/}
+                    {/*            <Input {...field} placeholder='last name' />*/}
+                    {/*            <FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                    {/*        </FormControl>*/}
+                    {/*    )}*/}
+                    {/*</Field>*/}
+                    {/*<Field name='description' validate={validateName}>*/}
+                    {/*    {({ field, form }) => (*/}
+                    {/*        <FormControl isInvalid={form.errors.name && form.touched.name}>*/}
+                    {/*            <FormLabel>Description</FormLabel>*/}
+                    {/*            <Input {...field} placeholder='description' />*/}
+                    {/*            <FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                    {/*        </FormControl>*/}
+                    {/*    )}*/}
+                    {/*</Field>*/}
+                    {/*<Field name='length' validate={validateName}>*/}
+                    {/*    {({ field, form }: any) => (*/}
+                    {/*        <FormControl isInvalid={form.errors.name && form.touched.name}*/}
+                    {/*                     sx={{width:'200px'}}*/}
+                    {/*        >*/}
+                    {/*            <FormLabel>Length</FormLabel>*/}
+                    {/*            <Input {...field} placeholder='length' />*/}
+                    {/*            <FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                    {/*        </FormControl>*/}
+                    {/*    )}*/}
+                    {/*</Field>*/}
+                    {/*<Field name='height' validate={validateName}>*/}
+                    {/*    {({ field, form } :any ) => (*/}
+                    {/*        <FormControl isInvalid={form.errors.name && form.touched.name}*/}
+                    {/*                     sx={{width:'200px'}}*/}
+                    {/*        >*/}
+                    {/*            <FormLabel>Height</FormLabel>*/}
+                    {/*            <Input {...field} placeholder='height' />*/}
+                    {/*            <FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                    {/*        </FormControl>*/}
+                    {/*    )}*/}
+                    {/*</Field>*/}
                     <Button
                         mt={4}
                         colorScheme='teal'

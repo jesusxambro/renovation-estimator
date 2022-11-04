@@ -86,10 +86,8 @@ function ProjectDetail(){
                 onClick={(event)=>{navigate(`/bathrooms/${id}/edit`)}}
             >Edit</Button>
             <div>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.264463239425!2d-87.82650748426528!3d42.35820284321102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fed71cdcdb90f%3A0x5e1015e42c37074c!2sWaukegan%20Harbor%20%26%20Marina!5e0!3m2!1sen!2sus!4v1667510694057!5m2!1sen!2sus"
-                    width="600" height="450" style="border:0;" allowFullScreen="" loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                <iframe width="600" height="450" loading="lazy" allowFullScreen
+                        src="https://www.google.com/maps/embed/v1/place?q=...&key=..."></iframe>
             </div>
         </div>
     )

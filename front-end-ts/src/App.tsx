@@ -27,7 +27,12 @@ export const ProjectData = z.object(
         sink_Comments: z.string().min(1),
         toilet: z.boolean(),
         toilet_Comments: z.string().min(1),
-        description: z.string().min(1)
+        description: z.string().min(1),
+        address: z.string().min(1),
+        zipCode: z.number(),
+        city: z.string().min(1),
+        state: z.string().min(1),
+
     }
 )
 export type Project = z.infer<typeof ProjectData>

@@ -58,6 +58,8 @@ function Projects(props: ProjectsProps){
                             }
                             alt='a bathroom in remodel'
                             boxSize='full'
+                            objectFit='cover'
+                            objectPosition='center'
                         />
                     </Box>
                     <Stack>

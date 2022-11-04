@@ -10,7 +10,7 @@ import FormProject from "./FormProject";
 function EditProject(){
 
     let {id} = useParams();
-    const [project, setProjects] = useState<Project>();
+    const [project, setProjects] = useState<Project | undefined>();
     const navigate = useNavigate();
     async function getProject(){
         try {
@@ -29,8 +29,10 @@ function EditProject(){
 
 
     return(
+        // <>//mind blown...
         <>
-            <FormProject project={project}/>
+            {project&&<FormProject project={project}/>}
+
         </>
 
     )

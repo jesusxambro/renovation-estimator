@@ -14,7 +14,7 @@ function Home(props:HomeProps){
 
     return(
         <div>
-            <SimpleGrid columns={3} spacing={5}>
+            <SimpleGrid columns={3} spacing={5} mx={4}>
                 {props.list.length > 0?
                     props.list.map((project,index)=>{
                         return(
