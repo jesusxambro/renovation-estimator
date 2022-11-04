@@ -22,7 +22,7 @@ function FormProject(props: FormProjectProps){
     return(
         <Formik
             initialValues={{
-                id:`${project?.id}`,
+                id:`${props.project?.id}`,
                 title: `${project?.title}`,
                 length: `${project?.length}`,
                 height: `${project?.height}`,
